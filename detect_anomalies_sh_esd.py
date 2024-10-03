@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
-from statsmodels.tsa.seasonal import seasonal_decompose
 from scipy import stats
+from statsmodels.tsa.seasonal import seasonal_decompose
 
 def sh_esd(data_stream, period, max_anomalies=0.05):
     """
@@ -25,16 +25,26 @@ def sh_esd(data_stream, period, max_anomalies=0.05):
     # Convert data to a pandas Series
     data = pd.Series(data_stream)
     
-    # Decompose the data stream into seasonal, trend, and residual components
-    decomposition = seasonal_decompose(data, period=period, model='additive', extrapolate_trend='freq')
+    # Check if we have enough observations for the decomposition
+    if len(data) < 2 * period:
+        raise ValueError(f"Not enough data for seasonal decomposition. "
+                         f"Data length must be at least 2 * period ({2 * period}), but got {len(data)}.")
+
+    try:
+        # Decompose the data stream into seasonal, trend, and residual components
+        decomposition = seasonal_decompose(data, period=period, model='additive', extrapolate_trend='freq')
     
-    # Extract the residual component
-    residual = decomposition.resid.dropna()
+        # Extract the residual component
+        residual = decomposition.resid.dropna()
+
+        # Perform the ESD test on the residuals
+        anomalies = perform_esd_test(residual, max_anomalies)
     
-    # Perform the ESD test on the residuals
-    anomalies = perform_esd_test(residual, max_anomalies)
-    
+    except ValueError as e:
+        raise ValueError(f"Error during seasonal decomposition: {e}")
+
     return anomalies
+
 
 def perform_esd_test(residuals, max_anomalies):
     """

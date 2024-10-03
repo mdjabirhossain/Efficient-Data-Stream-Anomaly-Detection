@@ -1,3 +1,4 @@
+import numpy as np
 from collections import deque
 
 def detect_anomalies_zscore(data_stream, window_size=50, threshold=3):

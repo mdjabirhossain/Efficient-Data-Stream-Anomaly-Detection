@@ -1,4 +1,43 @@
+import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+
+def visualize_anomalies_static(data_stream, anomalies_list, algorithm_name):
+    """
+    Visualizes the data stream and highlights detected anomalies in a static plot.
+    
+    Parameters:
+    - data_stream: np.array
+        The continuous data stream.
+    
+    - anomalies_list: list of tuples
+        A list of detected anomalies from the anomaly detection algorithm.
+    
+    - algorithm_name: str
+        The name of the anomaly detection algorithm used.
+    """
+    fig, ax = plt.subplots(figsize=(12, 6))
+    
+    # Plot the data stream
+    ax.plot(data_stream, label='Data Stream')
+    
+    # Extract anomaly indices and values
+    anomaly_x = [idx for idx, _ in anomalies_list]
+    anomaly_y = [value for _, value in anomalies_list]
+    
+    # Highlight anomalies
+    ax.scatter(anomaly_x, anomaly_y, color='red', label='Anomalies', zorder=5)
+    
+    # Add title and labels
+    ax.set_title(f'Anomaly Detection using {algorithm_name}')
+    ax.set_xlabel('Time Steps')
+    ax.set_ylabel('Value')
+    
+    # Add a legend
+    ax.legend(loc='upper right')
+    
+    # Display the plot
+    plt.show()
+
 
 def visualize_anomalies(data_stream, anomalies_list, algorithm_name):
     """
