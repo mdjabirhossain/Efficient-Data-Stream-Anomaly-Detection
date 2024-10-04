@@ -42,8 +42,7 @@ def main():
                         print("2. Brownian Motion")
                         print("3. GARCH (Generalized Autoregressive Conditional Heteroskedasticity)")
                         print("4. Poisson Process for Transaction Counts")
-                        print("5. Random Walk (with or without drift)")
-                        print("6. Seasonal Data with Noise")
+                        print("5. Seasonal Data with Noise")
                         generation_method = input("Please enter your choice (1-6): ")
 
                 method_choice = int(generation_method)
