@@ -4,16 +4,21 @@ This project implements various algorithms to detect anomalies in a continuous d
 
 ## Features
 
+- **Data Stream Simulation**:
+
+  - Provides five different methods for emulating real-time data streams:
+    1. **ARIMA (Autoregressive Integrated Moving Average)**: Used for simulating time series data with trends and autocorrelations.
+    2. **Brownian Motion**: A model often used to simulate random movements, such as stock price movements over time.
+    3. **GARCH (Generalized Autoregressive Conditional Heteroskedasticity)**: Used for simulating time series with changing volatility, such as financial market returns.
+    4. **Poisson Process for Transaction Counts**: Simulates discrete events like transaction counts or number of arrivals per unit of time.
+    5. **Seasonal Data with Noise**: Generates data with a repeating seasonal pattern and added noise, simulating seasonal trends.
+
 - **Algorithms Implemented**:
 
   - **Z-Score Anomaly Detection**: Uses statistical thresholds to detect anomalies based on z-scores.
   - **Seasonal Hybrid Extreme Studentized Deviate (S-H-ESD)**: Detects anomalies in seasonal time series data.
   - **Exponentially Weighted Moving Average (EWMA)**: Tracks trends in time series data and flags significant deviations.
-  - **GARCH Model**: Simulates time series data with varying volatility and identifies anomalies.
-  - **ARIMA Model**: Time series forecasting model to simulate trends and detect irregularities.
 
-- **Data Stream Simulation**:
-  - Emulates real-time data streams with noise, seasonal components, and injected anomalies.
 - **Real-Time Visualization**:
   - Visualizes the data stream with anomalies flagged for easy analysis.
 
